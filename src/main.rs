@@ -13,7 +13,7 @@ fn main() {
     });
 
     let exit_code = match command.as_str() {
-        "add" => AddCommand::new().handle(),
+        "add" => AddCommand::new(parameters).handle(),
         "list" => ListCommand::new().handle(),
         _ => {
             println!("Unknown command");
@@ -27,7 +27,7 @@ fn main() {
 
 
 fn help_message() -> () {
-    println!("Uso: <comando> <opzione>");
+    println!("Usage: <command> <option>");
     println!();
-    println!("Comando: add <stringa> o list");
+    println!("Commands are: add <string> or list");
 }

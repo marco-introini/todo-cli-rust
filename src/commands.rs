@@ -19,7 +19,15 @@ impl AddCommand {
 impl Command for AddCommand{
     fn handle (&self) -> i32 {
         println!("Add todo");
-        0
+
+        let todo_option = &self.args.get(2);
+        if let Some(todo) = todo_option {
+            dbg!(todo);
+            return 0
+        } else {
+            println!("ToDo description not typed");
+            return 1
+        }
     }
 }
 
