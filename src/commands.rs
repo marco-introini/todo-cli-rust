@@ -1,3 +1,6 @@
+use std::fs;
+use std::io::Write;
+
 // command interface
 pub trait Command {
     fn handle(&self) -> i32;
@@ -21,12 +24,18 @@ impl Command for AddCommand{
         println!("Add todo");
 
         let todo_option = &self.args.get(2);
-        if let Some(todo) = todo_option {
-            dbg!(todo);
-            return 0
+        return if let Some(todo) = todo_option {
+            let mut file = fs::OpenOptions::new()
+                .write(true)
+                .append(true)
+                .open("Storage.txt")
+                .expect("File not found");
+
+            writeln!(file,"{}",todo).expect("File not writable");
+            0
         } else {
             println!("ToDo description not typed");
-            return 1
+            1
         }
     }
 }
@@ -46,6 +55,8 @@ impl ListCommand {
 impl Command for ListCommand {
     fn handle (&self) -> i32 {
         println!("List todo");
+        let todos = fs::read_to_string("Storage.txt").expect("File not found");
+        println!("{todos}");
         0
     }
 }
