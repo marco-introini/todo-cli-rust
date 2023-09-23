@@ -5,13 +5,13 @@ pub trait Command {
 
 
 pub struct AddCommand {
-    
+    args: Vec<String>
 }
 
 impl AddCommand {
-    pub fn new() -> Self {
+    pub fn new(args: Vec<String>) -> Self {
         return AddCommand {
-
+            args
         }
     }
 }
