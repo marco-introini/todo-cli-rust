@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "prove-rust"
+name = "todo-cli-rust"
 version = "0.1.0"
