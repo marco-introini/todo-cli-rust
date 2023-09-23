@@ -1,13 +1,27 @@
+mod commands;
+
 use std::{env, process};
 
-fn main() {
-    let parametri: Vec<String> = env::args().collect();
+use commands::*;
 
-    let comando = parametri.get(1).unwrap_or_else(|| {
+fn main() {
+    let parameters: Vec<String> = env::args().collect();
+
+    let command = parameters.get(1).unwrap_or_else(|| {
         help_message();
         process::exit(0);
     });
-    dbg!(comando);
+
+    let exit_code = match command.as_str() {
+        "add" => AddCommand::new().handle(),
+        "list" => ListCommand::new().handle(),
+        _ => {
+            println!("Unknown command");
+            1
+        } // default
+    };
+
+    process::exit(exit_code);
 
 }
 
