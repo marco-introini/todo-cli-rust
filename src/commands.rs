@@ -60,3 +60,27 @@ impl Command for ListCommand {
         0
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn add_command() {
+        // arrange
+        let args = vec![
+          "todo".to_string(),
+          "add".to_string(),
+          "example1".to_string(),
+        ];
+        let add = AddCommand::new(args);
+
+        // act
+        let exit_code = add.handle();
+
+        // assert
+        assert_eq!(exit_code,0);
+    }
+}
+
+
